@@ -9,5 +9,6 @@ PORT (
 END cc2_ohs;
 
 ARCHITECTURE behavior OF cc2_ohs IS
+BEGIN
     z <= (y(4) XOR y(8)) AND NOT (y(0) OR y(1) OR y(2) OR y(3) OR y(5) OR y(6) OR y(7));
 END behavior;

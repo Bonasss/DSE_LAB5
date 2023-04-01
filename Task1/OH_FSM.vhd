@@ -4,7 +4,7 @@ use IEEE.std_logic_1164.all;
 ENTITY OH_FSM IS
 PORT(
     SW, KEY: IN STD_LOGIC_VECTOR(1 DOWNTO 0);
-    LEDR: OUT STD_LOGIC_VECTOR(9 DOWNTO 0):=(OTHERS=>'0')
+    LEDR: OUT STD_LOGIC_VECTOR(9 DOWNTO 0)
 );
 END OH_FSM;
 -- SW1: w input --SW0: active low synch reset --KEY1: unused --KEY0: manual clock input
@@ -36,8 +36,9 @@ END COMPONENT;
 
 BEGIN
 cc1: cc1_ohs PORT MAP (w=>SW(1), resetn=>SW(0), y=>curr_state, x=>next_state);
-cc2: cc2_ohs PORT MAP (y=>curr_state, z=>LEDR(0))
+cc2: cc2_ohs PORT MAP (y=>curr_state, z=>LEDR(0));
 q1: FOR i IN 0 to 8 GENERATE
-    ffx: flipflop(D=>x(i), Clock=>KEY(0), Resetn=>SW(0), Q=>y(i));
+    ffx: flipflop PORT MAP(D=>next_state(i), Clock=>KEY(0), Resetn=>'1', Q=>curr_state(i));
 END GENERATE;
+LEDR(9 DOWNTO 1)<=(others=>'0');
 END structure;
