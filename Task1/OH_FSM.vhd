@@ -8,7 +8,7 @@ PORT(
 );
 END OH_FSM;
 -- SW1: w input --SW0: active low synch reset --KEY1: unused --KEY0: manual clock input
--- LEDR(8 DOWNTO 1): unused (turn them off)
+-- LEDR(9 DOWNTO 1): unused (turn them off)
 
 ARCHITECTURE structure OF OH_FSM IS
 
